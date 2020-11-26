@@ -4,18 +4,43 @@ namespace App\Http\Controllers;
 
 class HomeController extends Controller
 {
+	private $cities = [
+		[
+			'name' => 'Jakarta',
+			'latlon' => ''
+		],
+		[
+			'name' => 'Bandung',
+			'latlon' => '-6.917464/107.619125'
+		],
+		[
+			'name' => 'Semarang',
+			'latlon' => '-7.005145/110.438126'
+		],
+		[
+			'name' => 'Surabaya',
+			'latlon' => '-7.257472/112.752090'
+		],
+		[
+			'name' => 'Denpasar',
+			'latlon' => '-8.670458/115.212631'
+		],
+	];
+
 	// handle request without lat & lon
     public function __invoke()
     {
+		$cities = $this->cities;
 		$weather = $this->getWeather();
-		return view('weatherview', compact('weather'));
+		return view('weatherview', compact('weather', 'cities'));
     }
 
 	// handle request with lat & lon
 	public function index($lat, $lon)
 	{
+		$cities = $this->cities;
 		$weather = $this->getWeather($lat, $lon);
-		return view('weatherview', compact('weather'));
+		return view('weatherview', compact('weather', 'cities'));
 	}
 
 	// get weather information from the API
@@ -41,6 +66,8 @@ class HomeController extends Controller
 		    $obj = $res->getBody();
 			$weather = json_decode($obj);
 			return $weather;
+		} elseif ($statusCode == 400) {
+			return redirect('/');
 		} elseif ($statusCode > 400) { 	// show error based on status code
 			abort($statusCode, $status);
 		} else { 						// show other errors
