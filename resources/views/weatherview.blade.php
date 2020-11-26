@@ -22,12 +22,12 @@
 				<caption>Cuaca saat ini</caption>
 				<thead>
 					<tr>
-						<th>Date</th>
-						<th>Time</th>
-						<th>Temperatur</th>
-						<th>Cuaca</th>
-						<th>Keterangan</th>
-						<th>Icon</th>
+						<th scope="col">Date</th>
+						<th scope="col">Time</th>
+						<th scope="col">Temperatur</th>
+						<th scope="col">Cuaca</th>
+						<th scope="col">Keterangan</th>
+						<th scope="col">Icon</th>
 					</tr>
 				</thead>
 				<tbody>

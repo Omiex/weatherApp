@@ -12,5 +12,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', App\Http\Controllers\HomeController::class);
-Route::get('/{lat}/{lon}', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', App\Http\Controllers\HomeController::class); // get weather with default location
+Route::get('/{lat}/{lon}', [App\Http\Controllers\HomeController::class, 'index']); // get weather with spesific location
