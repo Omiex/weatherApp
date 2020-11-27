@@ -10,10 +10,12 @@
 
 			<!-- main icon -->
 			<div class="relative bg-white h-60">
-				<main-icon :weather="weather.current" :selectedTime="selectedTime" />
-				<!-- <div v-for="i in 24">
-					<main-icon :weather="weather.hourly[i]" :selectedTime="selectedTime" />
-				</div> -->
+				<div v-for="i in 24" v-show="show = weather.current.dt == selectedTime">
+					<main-icon :weather="weather.current" />
+				</div>
+				<div v-for="i in 24" v-show="show = weather.hourly[i-1].dt == selectedTime">
+					<main-icon :weather="weather.hourly[i-1]" />
+				</div>
 				<div class="p-2">
 					{{ time(selectedTime) }}
 				</div>
@@ -33,7 +35,7 @@
 			<div class="">
 
 				<div class="">
-					<input class="rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full" type="range" :min="older" :max="newer" :step="step" value="selectedTime" v-model="selectedTime" />
+					<input class="rounded-lg focus:outline-none overflow-hidden appearance-none bg-gray-400 h-3 w-full" type="range" :min="older" :max="newer" :step="step" value="selectedTime" v-model="selectedTime" />
 				</div>
 			</div>
 		</div>

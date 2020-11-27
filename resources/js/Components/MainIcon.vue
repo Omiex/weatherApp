@@ -6,27 +6,21 @@
 		<div class="p-2">
 			<p>{{ currentWeather.description }}</p>
 		</div>
-		<div class="">
-			<!-- {{ show }} {{ ini }} -->
-		</div>
 	</div>
 </template>
 <script>
-	import Main from '@/Pages/Main'
-
     export default {
         components: {
-			Main
+
         },
 
 		data() {
 			return {
-				show: this.weather.dt,
-				ini: this.selectedTime
+
 			}
 		},
 
-		props: ['selectedTime', 'weather'],
+		props: ['weather'],
 
 		methods: {
 			getImage: function(icon) {
