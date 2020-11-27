@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -30,17 +31,23 @@ class HomeController extends Controller
 	// handle request without lat & lon
     public function __invoke()
     {
+		$baseUrl = url('/');
+		$latlon = '';
 		$cities = $this->cities;
 		$weather = $this->getWeather();
-		return view('weatherview', compact('weather', 'cities'));
+		
+		return Inertia::render('Main', compact('weather', 'cities', 'latlon', 'baseUrl'));
     }
 
 	// handle request with lat & lon
 	public function index($lat, $lon)
 	{
+		$baseUrl = url('/');
+		$latlon = $lat . '/' . $lon;
 		$cities = $this->cities;
 		$weather = $this->getWeather($lat, $lon);
-		return view('weatherview', compact('weather', 'cities'));
+
+		return Inertia::render('Main', compact('weather', 'cities', 'latlon', 'baseUrl'));
 	}
 
 	// get weather information from the API
