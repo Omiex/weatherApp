@@ -15,3 +15,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', App\Http\Controllers\HomeController::class); // get weather with default location
 Route::get('/{lat}/{lon}', [App\Http\Controllers\HomeController::class, 'index'])
 	->where(['lat' => '[-0-9.]+', 'lon' => '[-0-9.]+']); // get weather with spesific location
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia\Inertia::render('Dashboard');
+})->name('dashboard');
